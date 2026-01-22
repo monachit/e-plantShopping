@@ -10,6 +10,13 @@ function ProductList({ onHomeClick }) {
     const dispatch = useDispatch();
     const [addedToCart, setAddedToCart] = useState({});
 
+    const CartItems = useSelector(state => state.cart.items);
+
+    // Calculate total quantity of items in cart
+    const calculateTotalQuantity = () => {
+        return CartItems ? CartItems.reduce((total, item) => total + item.quantity, 0) : 0;
+    };
+    
     const handleAddToCart = (product) => {
         dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
         
